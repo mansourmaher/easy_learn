@@ -15,7 +15,7 @@ function Page() {
         >
           <div className="flex items-center justify-between ">
             <div className="w-[190px]">
-              <Logo />
+              {/* <Logo /> */}
             </div>
           </div>
 
