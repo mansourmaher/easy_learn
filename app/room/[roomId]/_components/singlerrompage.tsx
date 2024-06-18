@@ -6,7 +6,7 @@ import { v4 } from "uuid";
 import { Button } from "@/components/ui/button";
 import { sendMessageofthestream } from "@/actions/conversation/sendmessageofstream";
 import { closeMeeting } from "@/actions/system/closemeeting";
-import { GhostIcon } from "lucide-react";
+import { GhostIcon, Send, StopCircle } from "lucide-react";
 
 interface SingleRoomPageProps {
   theuseristheownerofthemeeting: boolean;
@@ -102,15 +102,20 @@ const SingleRoomPage = ({
 
   return (
     <div className="w-full max-h-screen flex flex-col">
-      <div ref={init} className="flex-grow"></div>
+      <div ref={init} className="flex-grow h-[950px] relative"></div>
       {theuseristheownerofthemeeting && (
-        <div className="flex items-center space-x-2 p-4">
-          <Button variant="primary" onClick={sendmessage}>
-            Share the meeting
+        <div className="absolute bottom-0 ml-[520px] mb-4 flex  space-x-2 p-4  ">
+          <Button
+            onClick={sendmessage}
+            className="flex items-center justify-center space-x-2 text-white bg-transparent border p-3"
+          >
+            <Send className="h-6 w-6" />
           </Button>
-
-          <Button variant="green" onClick={handelclosetheMeeting}>
-            Finish the meeting
+          <Button
+            onClick={handelclosetheMeeting}
+            className="flex items-center justify-center space-x-2 text-white bg-transparent border p-3"
+          >
+            <StopCircle className="h-6 w-6" />
           </Button>
         </div>
       )}
