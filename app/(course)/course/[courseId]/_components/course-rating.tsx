@@ -1,0 +1,156 @@
+"use client";
+import {
+  CommentCourse,
+  UpdateComment,
+} from "@/actions/Etudiant/comment-course";
+import { Editor } from "@/components/editor";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { set } from "date-fns";
+import { Loader, Loader2 } from "lucide-react";
+import React from "react";
+import toast from "react-hot-toast";
+import { FaStar } from "react-icons/fa";
+import { useToast } from "@/components/ui/use-toast";
+
+interface RatingProps {
+  courseId?: string;
+  readonly?: boolean;
+  initailComment?: string;
+  initialRating?: number;
+  isUpdating?: boolean;
+  commentId?: string;
+}
+const labels: { [index: string]: string } = {
+  0.5: "Useless",
+  1: "Useless+",
+  1.5: "Poor",
+  2: "Poor+",
+  2.5: "Ok",
+  3: "Ok+",
+  3.5: "Good",
+  4: "Good+",
+  4.5: "Excellent",
+  5: "Excellent+",
+};
+
+export default function CourseRating({
+  courseId,
+  initailComment,
+  initialRating,
+  isUpdating,
+  commentId,
+}: RatingProps) {
+  const initialeRating = initialRating ? initialRating : 0;
+  const initailCommente = initailComment ? initailComment : "";
+
+  const [rating, setRating] = React.useState(initialeRating);
+
+  const [comment, setComment] = React.useState(initailCommente);
+  const [isDisabled, setIsDisabled] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(true);
+  const toast2 = useToast();
+
+  const handleRatingChange = (event: any) => {
+    setRating(parseFloat(event.target.value));
+  };
+  const onclick = async () => {
+    setIsDisabled(true);
+    console.log(rating, "comment" + comment, courseId);
+
+    if (isUpdating) {
+      await UpdateComment(commentId!, rating!, comment!, courseId!);
+      setIsVisible(false);
+      toast.success("Comment updated");
+    } else {
+      const result = await CommentCourse(rating!, comment!, courseId!);
+      if (result) {
+        toast.error(result);
+      }
+      setIsVisible(false);
+      if (!result) toast.success("Comment added");
+    }
+
+    setIsDisabled(false);
+
+    setRating(0);
+    setComment("");
+  };
+
+  return (
+    <>
+      {isVisible && (
+        <>
+          <div className="flex flex-col gap-y-6 w-full  ">
+            <div className="flex flex-col gap-x-6 items-center">
+              <h1 className="text-2xl font-semibold">Rate this course</h1>
+              <p className="text-sm text-muted-foreground">
+                Your rating will help others to choose the right course. Your
+                rating will be public.
+              </p>
+              <div className="flex flex-row gap-x-1">
+                {[...Array(5)].map((_, index) => {
+                  const currentRating = index + 1;
+                  return (
+                    <div
+                      key={currentRating}
+                      className="flex flex-row space-x-2"
+                    >
+                      <label>
+                        <input
+                          type="radio"
+                          name="rate"
+                          value={currentRating}
+                          checked={rating === currentRating}
+                          onChange={handleRatingChange}
+                          className="hidden"
+                        />
+                        <FaStar
+                          className={cn(
+                            "text-2xl",
+                            rating! >= currentRating
+                              ? "text-yellow-400"
+                              : "text-gray-400"
+                          )}
+                        />
+                      </label>
+                    </div>
+                  );
+                })}
+              </div>
+              <p> {labels[rating!]}</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-[580px_580px] gap-8 place-content-center">
+              <div className="col-span-2 ">
+                <h1 className="text-2xl font-semibold">Write a review</h1>
+
+                <Editor value={comment!} onChange={setComment} />
+              </div>
+            </div>
+            {rating !== 0 && comment !== "" ? (
+              <div className="flex flex-row justify-end pr-32">
+                <Button
+                  disabled={rating === 0 || comment === "" || isDisabled}
+                  className="bg-blue-500 hover:bg-blue-500/80 mb-3"
+                  onClick={onclick}
+                  variant="primary"
+                >
+                  {isDisabled ? (
+                    <Loader className="animate-spin" />
+                  ) : isUpdating ? (
+                    "Update"
+                  ) : (
+                    "Save"
+                  )}
+                </Button>
+              </div>
+            ) : (
+              <div className="mb-16"></div>
+            )}
+          </div>
+          <hr />
+        </>
+      )}
+    </>
+  );
+}

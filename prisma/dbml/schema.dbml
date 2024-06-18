@@ -1,0 +1,440 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Account {
+  id String [pk]
+  userId String [not null]
+  type String [not null]
+  provider String [not null]
+  providerAccountId String [not null]
+  refresh_token String
+  access_token String
+  expires_at Int
+  token_type String
+  scope String
+  id_token String
+  session_state String
+  user User [not null]
+
+  indexes {
+    (provider, providerAccountId) [unique]
+  }
+}
+
+Table User {
+  id String [pk]
+  name String
+  email String [unique]
+  emailVerified DateTime
+  password String
+  role UserRole [not null, default: 'STUDENT']
+  image String
+  createdAt DateTime [default: `now()`]
+  accounts Account [not null]
+  teacherAccess Boolean [not null, default: false]
+  teacherRequest TeacherRequest [not null]
+  filier String
+  origin Origin
+  about String
+  DateOfBirth DateTime
+  subtitle String
+  linkedin String
+  twitter String
+  github String
+  patiants String[] [not null]
+  points Int [default: 0]
+  courseReview CourseReview [not null]
+  course Course [not null]
+  courseUser CourseUser [not null]
+  report Report [not null]
+  teacher Notifications [not null]
+  student Notifications [not null]
+  post Post [not null]
+  postResponse PostResponse [not null]
+  Message Message [not null]
+  Meeting Meeting [not null]
+}
+
+Table Origin {
+  id String [pk]
+  userId String [unique, not null]
+  user User [not null]
+  value String [not null]
+  label String [not null]
+  flag String [not null]
+  region String [not null]
+  lalng Int[] [not null]
+}
+
+Table TeacherRequest {
+  id String [pk]
+  title String [not null]
+  userId String [not null]
+  status String [not null, default: 'pending']
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  url String [not null]
+  user User [not null]
+}
+
+Table VerificationToken {
+  id String [pk]
+  email String [not null]
+  token String [not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
+}
+
+Table PasswordResetToken {
+  id String [pk]
+  email String [not null]
+  token String [not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
+}
+
+Table Course {
+  id String [pk]
+  userId String [not null]
+  user User
+  title String [not null]
+  description String
+  imageUrl String
+  price Float
+  isPublished Boolean [not null, default: false]
+  status String [not null, default: 'pending']
+  whyitsrejcted String
+  categoryId String
+  category Category
+  target String[] [not null]
+  level String
+  totalStars Int [default: 0]
+  totalReviews Int [default: 0]
+  totalhours Float
+  chapters Chapter [not null]
+  purchases Purchase [not null]
+  attachment Attachment [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  quiz Quiz [not null]
+  review CourseReview [not null]
+  courseUser CourseUser [not null]
+  totalPurchases Int [default: 0]
+  report Report [not null]
+  Conversation Conversation [not null]
+  communityId String
+}
+
+Table CourseUser {
+  id String [pk]
+  userId String [not null]
+  user User
+  courseId String [not null]
+  course Course [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  status String [not null, default: 'Not started']
+  score Float
+  classement Int [default: 0]
+
+  indexes {
+    (userId, courseId) [unique]
+  }
+}
+
+Table CourseReview {
+  id String [pk]
+  userId String
+  user User
+  starts Int
+  comment String
+  createdAt DateTime [default: `now()`, not null]
+  likes Int [default: 0]
+  dislikes Int [default: 0]
+  isMasqued Boolean [not null, default: false]
+  courseId String [not null]
+  course Course [not null]
+}
+
+Table Attachment {
+  id String [pk]
+  name String [not null]
+  url String [not null]
+  courseId String [not null]
+  course Course [not null]
+  chapterId String [not null]
+  chapter Chapter [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Category {
+  id String [pk]
+  name String [not null]
+  courses Course [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  Community Community [not null]
+}
+
+Table Chapter {
+  id String [pk]
+  title String [not null]
+  descreption String
+  videoUrl String
+  resources Attachment [not null]
+  toDoName String
+  toDo String
+  position Int [not null]
+  isPublished Boolean [not null, default: false]
+  isFree Boolean [not null, default: false]
+  muxData MuxData
+  courseId String [not null]
+  course Course [not null]
+  userProgress UserProgress [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  quiz Quiz [not null]
+  report Report [not null]
+}
+
+Table Report {
+  id String [pk]
+  courseId String [not null]
+  course Course [not null]
+  userId String [not null]
+  user User [not null]
+  chapterId String [not null]
+  chapter Chapter [not null]
+  work String
+  workUrl String
+  grade Float
+  note String
+  status String [not null, default: 'pending']
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table MuxData {
+  id String [pk]
+  playbackId String [not null]
+  assetId String [not null]
+  chapterId String [unique, not null]
+  chapter Chapter [not null]
+}
+
+Table UserProgress {
+  id String [pk]
+  userId String [not null]
+  chapterId String [not null]
+  chapter Chapter [not null]
+  isCompleted Boolean [not null, default: false]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  indexes {
+    (userId, chapterId) [unique]
+  }
+}
+
+Table StripeCustomer {
+  id String [pk]
+  userId String [not null]
+  stripeCustomerId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Purchase {
+  id String [pk]
+  userId String [not null]
+  courseId String [not null]
+  course Course [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  indexes {
+    (userId, courseId) [unique]
+  }
+}
+
+Table Quiz {
+  id String [pk]
+  question String [not null]
+  answer String [not null]
+  courseId String [not null]
+  course Course [not null]
+  createdAt DateTime [default: `now()`, not null]
+  chapterId String [not null]
+  chapter Chapter [not null]
+  options Options [not null]
+}
+
+Table Options {
+  id String [pk]
+  options String[] [not null]
+  correctOption String [not null]
+  quizId String [not null]
+  quiz Quiz [not null]
+}
+
+Table Notifications {
+  id String [pk]
+  teacher String [not null]
+  user User [not null]
+  student String [not null]
+  studentNotif User [not null]
+  message String [not null]
+  courseId String
+  chapterId String
+  createdAt DateTime [default: `now()`, not null]
+  isRead Boolean [not null, default: false]
+  distination String
+}
+
+Table Community {
+  id String [pk]
+  title String [not null]
+  categoryId String
+  category Category
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  posts Post [not null]
+}
+
+Table Post {
+  id String [pk]
+  content String [not null]
+  userId String [not null]
+  user User [not null]
+  isthecontentisimage Boolean [not null, default: false]
+  imageurl String
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  communityId String [not null]
+  community Community [not null]
+  PostResponse PostResponse [not null]
+}
+
+Table PostResponse {
+  id String [pk]
+  content String
+  userId String
+  user User
+  imageurl String
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  postId String
+  post Post
+}
+
+Table Conversation {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  title String
+  courseId String
+  course Course
+  paticipantsId String[] [not null]
+  messages Message [not null]
+}
+
+Table Message {
+  id String [pk]
+  body String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  fileUrl String
+  imageUrl String
+  conversationId String [not null]
+  conversation Conversation [not null]
+  senderId String [not null]
+  sender User [not null]
+}
+
+Table Meeting {
+  id String [pk]
+  title String [not null]
+  description String [not null]
+  link String [not null]
+  status String [not null, default: 'active']
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  user User [not null]
+  userId String [not null]
+}
+
+Enum UserRole {
+  STUDENT
+  ADMIN
+  TEACHER
+}
+
+Ref: Account.userId > User.id [delete: Cascade]
+
+Ref: Origin.userId - User.id
+
+Ref: TeacherRequest.userId > User.id
+
+Ref: Course.userId > User.id
+
+Ref: Course.categoryId > Category.id
+
+Ref: CourseUser.userId > User.id
+
+Ref: CourseUser.courseId > Course.id
+
+Ref: CourseReview.userId > User.id
+
+Ref: CourseReview.courseId > Course.id
+
+Ref: Attachment.courseId > Course.id
+
+Ref: Attachment.chapterId > Chapter.id
+
+Ref: Chapter.courseId > Course.id
+
+Ref: Report.courseId > Course.id
+
+Ref: Report.userId > User.id
+
+Ref: Report.chapterId > Chapter.id
+
+Ref: MuxData.chapterId - Chapter.id
+
+Ref: UserProgress.chapterId > Chapter.id
+
+Ref: Purchase.courseId > Course.id
+
+Ref: Quiz.courseId > Course.id
+
+Ref: Quiz.chapterId > Chapter.id
+
+Ref: Options.quizId > Quiz.id
+
+Ref: Notifications.teacher > User.id
+
+Ref: Notifications.student > User.id
+
+Ref: Community.categoryId > Category.id
+
+Ref: Post.userId > User.id
+
+Ref: Post.communityId > Community.id
+
+Ref: PostResponse.userId > User.id
+
+Ref: PostResponse.postId > Post.id
+
+Ref: Conversation.courseId > Course.id
+
+Ref: Message.conversationId > Conversation.id [delete: Cascade]
+
+Ref: Message.senderId > User.id [delete: Cascade]
+
+Ref: Meeting.userId > User.id

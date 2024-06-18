@@ -1,0 +1,25 @@
+import ComunityUserItem from "./comunity-users-item";
+import { getAllusersInComunityById } from "@/actions/community/get-users-in-community";
+
+interface ComunityUserProps {
+  communityId: string;
+}
+
+export const ComunityUser = async ({ communityId }: ComunityUserProps) => {
+  const users = await getAllusersInComunityById(communityId);
+
+  return (
+    <div className="lg:block    bg-gray-100  space-y-2 w-80">
+      <div className="px-7 text-sm font-semibold bg-white  py-8 border-l-2">
+        Members - {users.length}
+      </div>
+      <div className="h-[560px] overflow-y-auto p-4 ">
+        {users.map((user) => (
+          <div key={user.id} className="flex  ">
+            <ComunityUserItem user={user} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
