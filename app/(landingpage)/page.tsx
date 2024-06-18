@@ -15,7 +15,7 @@ function Page() {
         >
           <div className="flex items-center justify-between ">
             <div className="w-[190px]">
-              {/* <Logo /> */}
+              <Logo />
             </div>
           </div>
 
@@ -267,11 +267,7 @@ function Page() {
               </div>
 
               <div>
-                <div className="mb-4">
-                  <h3 className="text-xs font-medium uppercase text-[#0059ff]">
-                    Steps
-                  </h3>
-                </div>
+                <div className="mb-4"></div>
 
                 <div className="flex gap-x-5 ms-1">
                   <div className="relative last:after:hidden after:absolute after:top-8 after:bottom-0 after:start-4 after:w-px after:-translate-x-[0.5px] after:bg-neutral-800">
