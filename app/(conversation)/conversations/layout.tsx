@@ -9,9 +9,6 @@ const LayoutPage = async ({ children }: { children: React.ReactNode }) => {
   const conversation = await getMyconversation();
   return (
     <div className="h-full">
-      {/* <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50 ">
-        <Sidebar community={community} isverifiedteacher={isverifiedteacher} />
-      </div> */}
       <ConversationsList conversations={conversation} />
 
       <div className=" h-full  ">{children}</div>
