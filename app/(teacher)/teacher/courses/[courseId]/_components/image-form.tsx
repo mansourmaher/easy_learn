@@ -51,7 +51,7 @@ export const ImageForm = ({initialeData,courseId}:ImageFormProps) => {
     const onSubmit=async(values:z.infer<typeof formSchema>)=>{
         try{
             await axios.patch(`/api/courses/${courseId}`,values);
-            toast.success("Descreption  updated");
+            toast.success("Image  updated");
             toggleEditing();
             router.refresh();
 

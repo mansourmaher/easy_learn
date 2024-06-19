@@ -32,6 +32,7 @@ import { revalidatePath } from "next/cache";
 import { MdAddComment } from "react-icons/md";
 import { Badge } from "../ui/badge";
 import { set } from "date-fns";
+import { useRouter } from "next/navigation";
 //import { QuizSchema } from "@/schemas";
 
 interface ConfirmModelProps {
@@ -40,6 +41,7 @@ interface ConfirmModelProps {
 }
 
 export const QuizModel = ({ chpaterId, courseId }: ConfirmModelProps) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [showOptions34, setShowOptions34] = useState(true); // State to track checkbox status
@@ -94,6 +96,7 @@ export const QuizModel = ({ chpaterId, courseId }: ConfirmModelProps) => {
         form.setValue("option1", "");
         form.setValue("option2", "");
         setStaticOptions([null]);
+        router.refresh();
       });
     setIsLoading(false);
   };

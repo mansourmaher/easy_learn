@@ -31,10 +31,10 @@ export default function SingleCheckPage({
               <div className="grid gap-2">
                 <CardTitle className="flex gap-x-2">
                   <FileText className="h-6 w-6 " />
-                  <span className="">Student Compte Rendu</span>
+                  <span className="">Student Submitted Work</span>
                 </CardTitle>
                 <CardDescription>
-                  Recent Compte Rendu from students
+                  Recent work submitted by students
                 </CardDescription>
               </div>
             </CardHeader>

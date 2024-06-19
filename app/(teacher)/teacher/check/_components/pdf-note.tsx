@@ -86,7 +86,7 @@ export default function PdfNote({ id }: FormProps) {
     >
       <DialogTrigger onClick={() => setIsOpen(true)} asChild>
         <Button variant="ghost" className="gap-1.5" aria-label="fullscreen">
-          Noter
+          Mark
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl w-full">
