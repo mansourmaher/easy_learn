@@ -1,8 +1,7 @@
 import { getAllEtudiantWithCompteRendu } from "@/actions/teacher/get-all-etduiant-with-compte-rendu";
 import { columns } from "./table-user/columns";
 import { DataTable } from "./table-user/data-table";
-import { Activity, FileText } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { FileText } from "lucide-react";
 import {
   Card,
   CardContent,
