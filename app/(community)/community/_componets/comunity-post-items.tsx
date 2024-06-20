@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { DeletCommentinForums } from "./deletepost";
 
 interface ComunityPostItemProps {
   post: Awaited<ReturnType<typeof getPostsInCommunity>>[0];
@@ -85,12 +86,7 @@ export default function ComunityPostItem({
                   Reply
                 </div>
                 {userId === post.user.id && (
-                  <div
-                    className="text-xs text-gray-500 cursor-pointer"
-                    onClick={hadneldeletepost}
-                  >
-                    Delete
-                  </div>
+                  <DeletCommentinForums id={post.id} />
                 )}
               </div>
             </div>

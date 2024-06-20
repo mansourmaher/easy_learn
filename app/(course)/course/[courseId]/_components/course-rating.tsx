@@ -64,11 +64,7 @@ export default function CourseRating({
       toast.success("Comment updated");
     } else {
       const result = await CommentCourse(rating!, comment!, courseId!);
-      if (result) {
-        toast.error(result);
-      }
-   
-      if (!result) toast.success("Comment added");
+      toast.success("Comment added");
     }
 
     setIsDisabled(false);

@@ -78,7 +78,7 @@ const StudentNavbar = async () => {
           asChild
         >
           {firstComunity && (
-            <Link href={`/community/${firstComunity.id}`}>Community</Link>
+            <Link href={`/community/${firstComunity.id}`}>Forums</Link>
           )}
         </Button>
         <Button

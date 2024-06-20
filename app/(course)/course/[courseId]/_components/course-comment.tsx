@@ -21,6 +21,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { deletecomment } from "@/actions/Etudiant/delete-comment";
+import { DeleteCommentCompoenents } from "./deletecomment";
 
 interface CommentListProps {
   comments: Awaited<ReturnType<typeof getCourseComments>> | null;
@@ -201,17 +202,7 @@ export default function CommentList({
                                   </div>
                                 )}
                               </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => {
-                                  handelDeleteComment(comment.id);
-                                }}
-                              >
-                                <div className="flex gap-x-2 p-2">
-                                  <Trash className="h-4 w-4 text-red-400" />
-                                </div>
-                              </Button>
+                              <DeleteCommentCompoenents id={comment.id} />
                             </div>
                           ) : null}
                           {isEdititng && idCommentToEdit === comment.id ? (
@@ -394,17 +385,7 @@ export default function CommentList({
                                   </div>
                                 )}
                               </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => {
-                                  handelDeleteComment(comment.id);
-                                }}
-                              >
-                                <div className="flex gap-x-2 p-2">
-                                  <Trash className="h-4 w-4 text-red-400" />
-                                </div>
-                              </Button>
+                              <DeleteCommentCompoenents id={comment.id} />
                             </div>
                           ) : null}
                           {isEdititng && idCommentToEdit === comment.id ? (
