@@ -9,15 +9,15 @@ export const CommentCourse=async(stars:number,review:string,courseId:string)=>{
 
     const user=await auth()
     const userId=user?.user.id as string
-    const existingcomment=await db.courseReview.findFirst({
-        where:{
-            courseId:courseId,
-            userId:userId
-        }
-    })
-    if(existingcomment){
-        return "You already commented this course"
-    }
+    // const existingcomment=await db.courseReview.findFirst({
+    //     where:{
+    //         courseId:courseId,
+    //         userId:userId
+    //     }
+    // })
+    // if(existingcomment){
+    //     return "You already commented this course"
+    // }
     
 
 
@@ -43,6 +43,7 @@ export const CommentCourse=async(stars:number,review:string,courseId:string)=>{
         }
     })
     revalidatePath(`/course/${courseId}`)
+    return "Commented successfully"
    
    
 

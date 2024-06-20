@@ -67,7 +67,7 @@ export default function CourseRating({
       if (result) {
         toast.error(result);
       }
-      setIsVisible(false);
+   
       if (!result) toast.success("Comment added");
     }
 
