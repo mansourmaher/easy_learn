@@ -1,16 +1,11 @@
 "use client";
-import { getCurrentUser } from "@/hooks/getCurrentUser";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
-import { AvatarFallback } from "../ui/avatar";
 import { getAllNotifications } from "@/actions/teacher/get-all-notifications";
 import { useEffect, useState } from "react";
 import { pusherClient } from "@/lib/pusher";
 import { ScrollArea } from "../ui/scroll-area";
 import SingleNotifications from "../single-notification";
-import { buttonVariants } from "../ui/button";
-import { cn } from "@/lib/utils";
-import { BellDot, BellDotIcon, BellIcon, CircleUser } from "lucide-react";
+import { BellIcon } from "lucide-react";
 
 interface UserButtonProps {
   notifications: Awaited<ReturnType<typeof getAllNotifications>>;
@@ -58,7 +53,7 @@ export default function SheetNotification({
             No notifications
           </div>
         )}
-        <ScrollArea className="h-[700px]  rounded-md border ">
+        <ScrollArea className=" rounded-md border ">
           {notification.map((notification) => (
             <SingleNotifications
               key={notification.id}

@@ -1,6 +1,7 @@
 import { CiVideoOn } from "react-icons/ci";
 import { getCourseById } from "@/actions/course/get-course-byId";
 import { ShoppingCart, Signal } from "lucide-react";
+import { db } from "@/lib/db";
 
 interface CourseOptionProps {
   course: Awaited<ReturnType<typeof getCourseById>> | null;
@@ -11,6 +12,16 @@ export default function CourseOption({
   course,
   courseTotalPurchased,
 }: CourseOptionProps) {
+  const publishedchapter = async () => {
+    const total = await db.chapter.count({
+      where: {
+        courseId: course?.id,
+        isPublished: true,
+      },
+    });
+    return total;
+  };
+
   return (
     <div className="p-8 mx-6">
       <hr className="mb-8" />
@@ -23,7 +34,7 @@ export default function CourseOption({
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="flex flex-row items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+        <div className="flex flex-row items-center space-x-4 p-4 bg-gray-50 rounded-lg place-content-center">
           <div className="rounded-full border p-3 border-blue-500">
             <Signal size={30} className="text-blue-600" />
           </div>
@@ -34,18 +45,16 @@ export default function CourseOption({
             </p>
           </div>
         </div>
-        <div className="flex flex-row items-center space-x-4 p-4 bg-gray-50 rounded-lg ">
+        <div className="flex flex-row items-center space-x-4 p-4 bg-gray-50 rounded-lg place-content-center">
           <div className="rounded-full border p-3 border-blue-500">
             <CiVideoOn size={30} className="text-blue-600" />
           </div>
           <div>
             <span className="text-lg font-semibold">Lessons</span>
-            <p className="mt-1 text-gray-700">
-              {course?.chapters?.length || 0} Lessons
-            </p>
+            <p className="mt-1 text-gray-700">{publishedchapter()} Lessons</p>
           </div>
         </div>
-        <div className="flex flex-row items-center space-x-4 p-4 bg-gray-50/100 rounded-lg ">
+        <div className="flex flex-row items-center space-x-4 p-4 bg-gray-50 rounded-lg place-content-center">
           <div className="rounded-full border p-3 border-blue-500">
             <ShoppingCart size={30} className="text-blue-600" />
           </div>
