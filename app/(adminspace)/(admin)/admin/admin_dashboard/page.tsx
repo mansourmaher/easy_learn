@@ -1,5 +1,3 @@
-import DashboardCard from "@/app/(teacherdashbord)/teacher_dashbord/_componets/dashbord_card";
-import CourseChart from "@/app/(teacherdashbord)/teacher_dashbord/_componets/course_fetchdata";
 import FetchDonutsData from "@/app/(teacherdashbord)/teacher_dashbord/_componets/fetch_donuts_data";
 import AdminDashbordCard from "@/app/(adminspace)/_components/admindashordCard";
 import AdminCourseChart from "@/app/(adminspace)/_components/admincoursechart";

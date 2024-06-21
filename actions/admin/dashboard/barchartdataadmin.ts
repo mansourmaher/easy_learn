@@ -14,7 +14,7 @@ export async function getTop5PurchasedCoursesByTeacher() {
             status:"verified",
         },
         
-         take:10,
+         take:5,
             orderBy:{
                 totalPurchases:"desc"
             },
