@@ -78,7 +78,7 @@ function DonutsChart({ level, users }: Props) {
         </div>
       </CardHeader>
 
-      <div className="h-[30vh] flex justify-center">
+      <div className="max-w-[300px] mx-auto ">
         <Doughnut data={data} />
       </div>
     </Card>

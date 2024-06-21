@@ -1,10 +1,6 @@
-import React from "react";
 import DonutsChart from "./donuts_chart";
 import {
-  getLevelDistinctCount,
-  getLevelDistinctCountForAdmin,
-  getTheoriginofsubscriptionuser,
-  getTheoriginofsubscriptionuserforAdmin,
+  getLevelDistinctCountForAdmin, getTheoriginofsubscriptionuserforAdmin
 } from "@/actions/admin/dashboard/getleveldistinctcount";
 
 const FetchDonutsData = async () => {
