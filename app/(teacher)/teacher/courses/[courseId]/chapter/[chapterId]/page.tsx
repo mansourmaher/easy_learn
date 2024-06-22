@@ -64,12 +64,7 @@ const EditChapter = async ({
     );
   }
 
-  const requiredFiels = [
-    chpater.title,
-    chpater.descreption,
-    chpater.videoUrl,
-    chpater.quiz[0]?.question,
-  ];
+  const requiredFiels = [chpater.title, chpater.descreption, chpater.videoUrl];
   const totalFields = requiredFiels.length;
   let filledFields = 0;
   requiredFiels.map((field) => {
@@ -86,12 +81,7 @@ const EditChapter = async ({
 
   return (
     <div>
-      {!chpater.isPublished && (
-        <Bannner title="This chapter is not yet published" />
-      )}
-
       <div className="p-6">
-        {}
         <div className="flex items-center justify-between">
           <div className="w-full">
             <Link

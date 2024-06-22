@@ -1,11 +1,17 @@
-import Bannner from "@/components/banner";
+import {
+  getTotalStudents,
+  getTotalSubscrption,
+  getTotalTecaher,
+} from "@/actions/system/getsomeanalytics";
 import { Logo } from "../(dashboard)/_components/logo";
-import CarouselFetchDta from "./_compoents/carouselfetchdata";
-import CourseCarousel from "./_compoents/coursecarousel";
 import CourseCarouselFetchdata from "./_compoents/coursecarouselfetchdata";
 import JoinBtn from "./_compoents/joinbtn";
 
-function Page() {
+const Page = async () => {
+  const tottalstudents = await getTotalStudents();
+  const tottalteachers = await getTotalTecaher();
+  const tottalsubsctiption = await getTotalSubscrption();
+
   return (
     <>
       <header className="mt-4 top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full">
@@ -168,7 +174,7 @@ function Page() {
                     </svg>
                     <div className="mt-3 sm:mt-5">
                       <h3 className="text-lg sm:text-3xl font-semibold ">
-                        2,000+
+                        {tottalteachers}
                       </h3>
                       <p className="mt-1 text-sm sm:text-base text-neutral-400">
                         Teachers
@@ -196,7 +202,7 @@ function Page() {
                     </div>
                     <div className="mt-3 sm:mt-5">
                       <h3 className="text-lg sm:text-3xl font-semibold ">
-                        85%
+                        {tottalstudents}
                       </h3>
                       <p className="mt-1 text-sm sm:text-base text-neutral-400">
                         Happy Students
@@ -225,10 +231,10 @@ function Page() {
                     </svg>
                     <div className="mt-3 sm:mt-5">
                       <h3 className="text-lg sm:text-3xl font-semibold ">
-                        $55M+
+                        {tottalsubsctiption}
                       </h3>
                       <p className="mt-1 text-sm sm:text-base text-neutral-400">
-                        Ads managed yearly
+                        Subscriptions
                       </p>
                     </div>
                   </div>
@@ -648,6 +654,6 @@ function Page() {
       </main>
     </>
   );
-}
+};
 
 export default Page;

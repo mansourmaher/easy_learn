@@ -80,6 +80,7 @@ const CourseIdPage = async ({
   const requiredFields = [
     course.title,
     course.description,
+    course.price,
 
     course.categoryId,
     course.imageUrl,
@@ -95,9 +96,7 @@ const CourseIdPage = async ({
 
   return (
     <>
-      {!course.isPublished && (
-        <Bannner title="This course is not yet published" />
-      )}
+    
       <div className="p-6">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-2">

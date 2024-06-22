@@ -14,6 +14,7 @@ import { getCourseUser } from "@/actions/system/get-courseUser";
 import Image from "next/image";
 import { format } from "date-fns";
 import { BiCertification } from "react-icons/bi";
+import { Logo } from "@/app/(dashboard)/_components/logo";
 
 interface CertifModalProps {
   courseUser: Awaited<ReturnType<typeof getCourseUser>>;
@@ -111,22 +112,25 @@ export default function CertifModal({ courseUser }: CertifModalProps) {
                                   "dd/MM/yyyy"
                                 )}
                               </span>
-                              <hr className="w-32 border-t-2 border-zinc-300" />
+                              <hr className="w-32 border-t-2 border-zinc-300 mt-6" />
                               <span className="text-sm">Start Date </span>
                             </div>
+                            <div>
+                              <Logo />
+                            </div>
                             <div className="flex flex-col items-center">
-                              {/* <hr className="w-32 border-t-2 border-zinc-300" /> */}
-                              {/* <Image
-                                src={courseUser?.course.imageUrl || ""}
+                              <Image
+                                src="/sig2.jpg"
                                 alt="logo"
                                 width={100}
-                                height={100}
-                                className="object-cover border-2 border-zinc-300 "
-                              /> */}
+                                height={50}
+                                className=""
+                              />
+                              <hr className="w-32 border-t-2 border-zinc-300" />
+
+                              <span className="text-sm">Signature</span>
                             </div>
                           </div>
-
-                          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-r from-gold-400 to-gold-300"></div>
                         </div>
                       </div>
                       <div className="flex justify-center items-center max-w-5xl   ">
