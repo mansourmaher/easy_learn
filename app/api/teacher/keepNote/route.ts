@@ -29,6 +29,7 @@ export async function POST(req:Request)
              })
              const allreportforcourse=await db.report.findMany({
                 where:{
+                    userId:createCompteRendu.userId,
                     courseId:createCompteRendu.courseId
                 },
                 select:{
