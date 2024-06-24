@@ -76,7 +76,10 @@ export const QuizForm = ({
   const [isloading, setIsloading] = useState(true);
 
   const btnShouldbediabled = () => {
-    if (quiz.length == 0) return false;
+    if (quiz.length == 0 && correctAnswer > wrongAnswer) {
+      return false;
+    }
+    
     if (
       (studentshouldreport && !hasreport) ||
       correctAnswer < wrongAnswer ||
